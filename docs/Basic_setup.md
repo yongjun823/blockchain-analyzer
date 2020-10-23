@@ -230,7 +230,7 @@ The name of the indices can be customized in the fabricbeat configuration file (
 ## Viewing dashboards
 
 After that, we can click the dashboards and see the overview of our data on the Overview Dashboard (org1):
-![alt text](https://github.com/hyperledger-labs/blockchain-analyzer/blob/master/docs/images/Org1_overview_basic.png "Org1 overview")
+![alt text](https://github.com/yongjun823/blockchain-analyzer/blob/master/docs/images/Org1_overview_basic.png "Org1 overview")
 **If the dashboards are empty, set the time range wider!**
 
 We can go on discovering the dashboards by scrolling and clicking the link fields, or by selecting another dashboards from the Dashboards menu.
