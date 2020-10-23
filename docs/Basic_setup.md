@@ -20,7 +20,7 @@ To get started with the project, clone the git repository. If you want to build 
 ```
 $ mkdir $GOPATH/src/github.com -p
 $ cd $GOPATH/src/github.com  
-$ git clone https://github.com/hyperledger-labs/blockchain-analyzer.git
+$ git clone https://github.com/yongjun823/blockchain-analyzer.git
 ```
 
 ## Start / stop the `basic` network
@@ -212,11 +212,11 @@ To stop the agent, simply type `Ctrl+C`
 Next, we navigate to http://localhost:5601.
 
 Click the dashboards icon on the left:
-![alt text](https://github.com/hyperledger-labs/blockchain-analyzer/blob/master/docs/images/Starting_page.png "Kibana starting page")
+![alt text](https://github.com/yongjun823/blockchain-analyzer/blob/master/docs/images/Starting_page.png "Kibana starting page")
 
 
 Kibana takes us to select a default index pattern. Click `fabricbeat-*`, then the star in the top right corner:
-![alt text](https://github.com/hyperledger-labs/blockchain-analyzer/blob/master/docs/images/Index_pattern_selection_basic.png "Setting default index pattern")
+![alt text](https://github.com/yongjun823/blockchain-analyzer/blob/master/docs/images/Index_pattern_selection_basic.png "Setting default index pattern")
 
 
 ### About indices

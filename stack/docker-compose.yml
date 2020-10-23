@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.1.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     container_name: elasticsearch1
     environment:
       - node.name=elasticsearch1
@@ -19,19 +19,11 @@ services:
         hard: -1
     cap_add:
       - ALL
-    # privileged: true
     deploy:
       replicas: 1
       update_config:
         parallelism: 1
         delay: 10s
-      resources:
-        limits:
-          cpus: '1'
-          memory: 256M
-        reservations:
-          cpus: '1'
-          memory: 256M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -51,7 +43,7 @@ services:
       - 9200:9200
       - 9300:9300
   elasticsearch2:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.1.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     container_name: elasticsearch2
     environment:
       - node.name=elasticsearch2
@@ -70,19 +62,11 @@ services:
         hard: -1
     cap_add:
       - ALL
-    # privileged: true
     deploy:
       replicas: 1
       update_config:
         parallelism: 1
         delay: 10s
-      resources:
-        limits:
-          cpus: '1'
-          memory: 256M
-        reservations:
-          cpus: '1'
-          memory: 256M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -101,7 +85,7 @@ services:
     ports:
       - 9201:9200
   elasticsearch3:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.1.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     container_name: elasticsearch3
     environment:
       - node.name=elasticsearch3
@@ -120,19 +104,11 @@ services:
         hard: -1
     cap_add:
       - ALL
-    # privileged: true
     deploy:
       replicas: 1
       update_config:
         parallelism: 1
         delay: 10s
-      resources:
-        limits:
-          cpus: '1'
-          memory: 256M
-        reservations:
-          cpus: '1'
-          memory: 256M
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -151,7 +127,7 @@ services:
     ports:
       - 9202:9200
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.1.1
+    image: docker.elastic.co/kibana/kibana:7.9.3
     container_name: kibana
     environment:
       SERVER_NAME: localhost
@@ -174,13 +150,6 @@ services:
       update_config:
         parallelism: 1
         delay: 10s
-      resources:
-        limits:
-          cpus: '1'
-          memory: 256M
-        reservations:
-          cpus: '1'
-          memory: 256M
       restart_policy:
         condition: on-failure
         delay: 30s
@@ -189,91 +158,6 @@ services:
     networks:
       - elastic
       - ingress
-  # auditbeat:
-  #   image: docker.elastic.co/beats/auditbeat:7.1.1
-  #   command: auditbeat -e -strict.perms=false
-  #   user: root
-  #   environment:
-  #     - setup.kibana.host=kibana:5601
-  #     - output.elasticsearch.hosts=["elasticsearch:9200"]
-  #   cap_add: ['AUDIT_CONTROL', 'AUDIT_READ']
-  #   pid: "host"
-  #   volumes:
-  #   #   - ${PWD}/configs/auditbeat.docker.yml:/usr/share/auditbeat/auditbeat.yml
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   networks:
-  #     - elastic
-  # metricbeat:
-  #   image: docker.elastic.co/beats/metricbeat:7.1.1
-  #   # command: --strict.perms=false
-  #   environment:
-  #     - setup.kibana.host=kibana:5601
-  #     - output.elasticsearch.hosts=["elasticsearch:9200"]
-  #   cap_add:
-  #     - AUDIT_CONTROL
-  #     - AUDIT_READ
-  #   volumes:
-  #     # - ${PWD}/configs/metricbeat.docker.yml:/usr/share/metricbeat/metricbeat.yml
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
-  #     - /proc:/hostfs/proc:ro
-  #     - /:/hostfs:ro
-  #   networks:
-  #     - elastic
-
-  # heartbeat:
-  #   image: docker.elastic.co/beats/heartbeat:7.1.1
-  #   command: --strict.perms=false
-  #   environment:
-  #     - setup.kibana.host=kibana:5601
-  #     - output.elasticsearch.hosts=["elasticsearch:9200"]
-  #   # volumes:
-  #   #   - ${PWD}/configs/heartbeat.docker.yml:/usr/share/heartbeat/heartbeat.yml
-  #   networks:
-  #     - elastic
-
-  # packetbeat:
-  #   image: docker.elastic.co/beats/packetbeat:7.1.1
-  #   command: --strict.perms=false
-  #   environment:
-  #     - setup.kibana.host=kibana:5601
-  #     - output.elasticsearch.hosts=["elasticsearch:9200"]
-  #   cap_add:
-  #     - NET_RAW
-  #     - NET_ADMIN
-  #   # volumes:
-  #   #   - ${PWD}/configs/packetbeat.docker.yml:/usr/share/packetbeat/packetbeat.yml
-  #   networks:
-  #     - elastic
-
-  # filebeat:
-  #   image: docker.elastic.co/beats/filebeat:7.1.1
-  #   command: --strict.perms=false
-  #   environment:
-  #     - setup.kibana.host=kibana:5601
-  #     - output.elasticsearch.hosts=["elasticsearch:9200"]
-  #   ports:
-  #     - 9000:9000
-  #   volumes:
-  #     # - ${PWD}/configs/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml
-  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   networks:
-  #     - elastic
-  # apmserver:
-  #   image: docker.elastic.co/apm/apm-server:7.1.1
-  #   command: --strict.perms=false
-  #   ports:
-  #     - 8200:8200
-  #     - 8201:8200
-  #   environment:
-  #     - apm-server.host=0.0.0.0
-  #     - setup.kibana.host=kibana:5601
-  #     - output.elasticsearch.hosts=["elasticsearch:9200"]
-  #   # volumes:
-  #   #   - ${PWD}/configs/apm-server.yml:/usr/share/apm-server/apm-server.yml
-  #   networks:
-  #       - elastic
   nginx:
     image: nginx:latest
     ports:
@@ -294,15 +178,3 @@ volumes:
 networks:
   elastic:
   ingress:
-
-# configs:
-#   auditbeat_config:
-#     file: configs/auditbeat.docker.yml
-#   filebeat_config:
-#     file: configs/filebeat.docker.yml
-#   heartbeat_config:
-#     file: configs/heartbeat.docker.yml
-#   metricbeat_config:
-#     file: configs/metricbeat.docker.yml
-#   packetbeat_config:
-#     file: configs/packetbeat.docker.yml
