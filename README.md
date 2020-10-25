@@ -1,5 +1,18 @@
 # Blockchain Analyzer: Analyzing Hyperledger Fabric Ledger, Transactions
 
+## Elastic stack error fix
+Error: elasticsearch exited with code 137
+
+Error fix
+1. Update elasticsearch & kibana version from ``7.1.1`` to ``7.9.3``
+2. Remove resources tag
+
+I tested it in a desktop (16G memory) and aws c5.large instance (cpu2 4G memory) environment. 
+If memory is small, please enter the vm size adjustment command.
+
+```
+sudo sysctl -w vm.max_map_count=262144
+```
 
 ## Description
 
